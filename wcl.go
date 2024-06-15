@@ -59,7 +59,7 @@ func main() {
 		}
 
 		for _, e := range entries {
-			if e.Type().IsRegular() {
+			if e.Type().IsRegular() && !strings.HasPrefix(e.Name(), ".") {
 				files = append(files, filepath.Join(file, e.Name()))
 			}
 		}
