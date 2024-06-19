@@ -49,6 +49,7 @@ func main() {
 		log.Fatalf("文件或目录路径不存在或无效路径: %s", file)
 	}
 
+	var isFile = false
 	files := []string{}
 	fi, _ := os.Stat(file)
 	switch mode := fi.Mode(); {
@@ -64,6 +65,7 @@ func main() {
 			}
 		}
 	case mode.IsRegular():
+		isFile = true
 		files = append(files, file)
 	}
 
@@ -93,5 +95,7 @@ func main() {
 		totalCount += rowCount
 		fmt.Printf("%8d %s\n", rowCount, f)
 	}
-	fmt.Printf("%8d total\n", totalCount)
+	if !isFile {
+		fmt.Printf("%8d total\n", totalCount)
+	}
 }
